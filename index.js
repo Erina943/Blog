@@ -10,10 +10,12 @@ var cors = require("cors");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: "https://blog-project-rust-zeta.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    preflightContinue: false,
     credentials: true,
+    optionsSuccessStatus: 204,
   })
 );
 
