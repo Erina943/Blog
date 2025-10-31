@@ -15,10 +15,13 @@ const userRegister = async (req, res) => {
       return res.status(400).json({ message: "User already registered!" });
     }
 
-    const hashedPassword = await bcrypt.hashSync(
-      password,
-      bcrypt.genSaltSync(10)
-    );
+    const salt = bcrypt.genSaltSync(10);
+    console.log(password);
+    console.log(salt);
+
+    const hashedPassword = bcrypt.hashSync(password, salt);
+    console.log(hashedPassword);
+
     const user = await User.create({
       username,
       email,
