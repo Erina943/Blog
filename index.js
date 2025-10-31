@@ -5,19 +5,19 @@ require("dotenv").config();
 const port = process.env.PORT;
 
 var cors = require("cors");
-// app.use(cors());
-// app.use(express.json());
-
 app.use(
   cors({
-    origin: "https://blog-project-rust-zeta.vercel.app",
+    origin: [
+      "http://localhost:5173",
+      "https://blog-project-rust-zeta.vercel.app",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-    preflightContinue: false,
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-    optionsSuccessStatus: 204,
   })
 );
+
+// app.options("*", cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
