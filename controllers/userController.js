@@ -75,7 +75,7 @@ const userProfile = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email, resetLink } = req.body;
     const user = await User.findOne({ email });
 
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -90,7 +90,7 @@ const forgotPassword = async (req, res) => {
     await user.save();
 
     // Send email
-    const resetLink = `${process.env.BASE_URL}/reset-password/${resetToken}`;
+    resetLink = `${resetLink}${resetToken}`;
     const html = `
       <h3>Password Reset Request</h3>
       <p>Click the link below to reset your password:</p>
